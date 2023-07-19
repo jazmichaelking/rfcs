@@ -1,13 +1,9 @@
 MDBOOK ?= mdbook
 PYTHON ?= python3
 
+.PHONY: generate clean preview
 
-.PHONY: dependencies generate clean preview
-
-check-dependencies:
-  $(if $(shell command -v $(MDBOOK) 2> /dev/null),,$(error "mdbook is not available, please follow the installation instructions in the README.md"))
-
-generate: check-dependencies
+generate:
 	@ $(PYTHON) book.py generate
 
 clean:
