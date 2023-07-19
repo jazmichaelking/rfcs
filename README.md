@@ -14,6 +14,7 @@ This isn't intended for proposals relating to a specific Fediverse project, nor 
 
 - [Opening](#rust-rfcs)
 - [Table of Contents]
+- [Setup & Installation]
 - [When you need to follow this process]
 - [Sub-team specific guidelines]
 - [Before creating an RFC]
@@ -25,6 +26,20 @@ This isn't intended for proposals relating to a specific Fediverse project, nor 
 - [Help this is all too informal!]
 - [License]
 - [Contributions]
+
+## Setup & Installation
+
+[Setup & Installation]: #setup-and-installation
+
+In order to work with the RFCs and preview them, you will need to have the following software installed:
+
+- `python3` - [Installation instructions](https://www.python.org/downloads/)
+- `mdbook` - [Installation instructions](https://rust-lang.github.io/mdBook/guide/installation.html)
+- `make` (optional)
+
+Then you can run `make preview` to view the generated "book" of RFCs. (`make preview` just calls `python3 generate-book.py` and `mdbook serve`, if your system does not have `make` available).
+
+Alternatively, you can open a pull request and view the preview for that via Vercel; A comment will be left on your pull request with instructions as to where to view the preview.
 
 ## When you need to follow this process
 

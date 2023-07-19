@@ -1,3 +1,6 @@
 *~
 book/
-src/
+# NOTE: Keep this file to make 'mdbook serve' work whether there is anything
+#	needed to be actually ignored.
+#	See https://github.com/rust-lang/mdBook/issues/1186.
+/build/.gitignore

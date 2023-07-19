@@ -19,30 +19,72 @@ It is recommended that if you have static content like images that you use a sim
 
 The chapters are presented in sorted-order.
 """
-
+import sys
 import os
 import shutil
 import subprocess
+import signal
 
 def main():
-    if os.path.exists('src'):
-        # Clear out src to remove stale links in case you switch branches.
-        shutil.rmtree('src')
-    os.mkdir('src')
+    if len(sys.argv) == 1 or sys.argv[1] == 'generate':
+        generate()
+    elif sys.argv[1] == 'preview':
+        preview()
+    elif sys.argv[1] == 'clean':
+        clean()
+    else:
+        print('Unknown command, expected one of: generate, preview, clean')
+        exit(1)
+
+def generate():
+    checkTools()
+    clean()
+    createFileLink('README.md', 'src/introduction.md')
 
     for path in os.listdir('text'):
-        symlink(f'../text/{path}', f'src/{path}')
-    symlink('../README.md', 'src/introduction.md')
-
+        if path == ".gitkeep" or path == "README.md":
+            continue
+        createFileLink(f'text/{path}', f'src/{path}')
+    
     with open('src/SUMMARY.md', 'w') as summary:
         summary.write('[Introduction](introduction.md)\n\n')
         collect(summary, 'text', 0)
 
     subprocess.call(['mdbook', 'build'])
 
+def clean():
+    if not os.path.exists('src'):
+        return
+
+    for path in os.listdir('src'):
+        if path == ".gitignore":
+            continue
+        elif os.path.isdir(f'src/{path}'):
+            shutil.rmtree(f'src/{path}')
+        else:
+            os.remove(f'src/{path}')
+
+def preview():
+    generate()
+    checkTools()
+
+    try:
+        subprocess.call(['mdbook', 'serve'])
+    except KeyboardInterrupt:
+        print(" exiting...")
+
+#
+# Helpers:
+#
+def checkTools():
+    if not shutil.which('mdbook'):
+        print("Could not locate mdbook executable, please see: https://rust-lang.github.io/mdBook/guide/installation.html")
+        exit(1)
+
 def collect(summary, path, depth):
     entries = [e for e in os.scandir(path) if e.name.endswith('.md')]
     entries.sort(key=lambda e: e.name)
+
     for entry in entries:
         indent = '    '*depth
         name = entry.name[:-3]
@@ -52,9 +94,9 @@ def collect(summary, path, depth):
         if os.path.isdir(maybe_subdir):
             collect(summary, maybe_subdir, depth+1)
 
-def symlink(src, dst):
+def createFileLink(src, dst):
     if not os.path.exists(dst):
-        os.symlink(src, dst)
+        os.link(os.path.abspath(src), dst)
 
 if __name__ == '__main__':
     main()
