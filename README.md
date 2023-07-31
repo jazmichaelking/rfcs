@@ -39,7 +39,6 @@ In order to work with the RFCs and preview them, you will need to have the follo
 
 Then you can run `make preview` to view the generated "book" of RFCs. (If your system does not have `make` available, then you can just use `python3 ./book.py preview`, which is all `make preview` is doing under the hood).
 
-
 ## When you need to follow this process
 
 [When you need to follow this process]: #when-you-need-to-follow-this-process
