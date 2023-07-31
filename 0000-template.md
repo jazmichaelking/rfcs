@@ -50,7 +50,7 @@ The section should return to the examples given in the previous section, and exp
 
 [drawbacks]: #drawbacks
 
-Why should we _not_ do this?
+Why should we _not_ do this? For example, major technical challenges, or how can this RFC be weaponised, abused, or misused by threat actors?
 
 # Rationale and alternatives
 
