@@ -1,5 +1,8 @@
 [book]
-title = "The IFTAS RFC Book"
+title = "IFTAS RFCs"
+description = "Proposals for improving the moderation and trust & safety for the Fediverse"
+language = "en"
+multilingual = false
 
 [build]
 build-dir = "build"
