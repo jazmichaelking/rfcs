@@ -1,7 +1,5 @@
-# Sample workflow for building and deploying a mdBook site to GitHub Pages
-#
-# To get started with mdBook see: https://rust-lang.github.io/mdBook/index.html
-#
+# Workflow for building and deploying the RFC Book site to GitHub Pages using 
+# mdbook and our python tooling.
 name: Deploy RFC Book site to Pages
 
 on:
