@@ -1,6 +1,9 @@
 [book]
 title = "The IFTAS RFC Book"
 
+[build]
+build-dir = "build"
+
 [output.html]
 no-section-label = true
 git-repository-url = "https://github.com/iftas-org/rfcs"
